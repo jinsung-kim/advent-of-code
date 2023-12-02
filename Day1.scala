@@ -35,7 +35,7 @@ object Day1 {
   def main(args: Array[String]): Unit = {
     val source = Source.fromFile("day1.txt").getLines.toSeq
     // Part One:
-    val parsedCalibrationLines = source.map(parseCalibrationLine(_))
+    val parsedCalibrationLines = source.map(parseCalibrationLine)
     val res = parsedCalibrationLines.foldLeft(0)(_ + _)
     println(s"(Part one): Total calibration number: ${res}")
 
