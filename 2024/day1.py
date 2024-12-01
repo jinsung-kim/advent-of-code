@@ -3,6 +3,7 @@ from collections import Counter
 file_path = 'day1.txt'
 
 
+# https://adventofcode.com/2024/day/1
 def main():
     location_ids = []
 
@@ -24,7 +25,7 @@ def main():
     for i in range(len(employee_list_1)):
         d += abs(employee_list_1[i] - employee_list_2[i])
 
-    print(d)
+    print(d)  # 2375403
 
     # Part Two.
     sim_score = 0
@@ -33,7 +34,7 @@ def main():
     for location_id in employee_list_1:
         sim_score += (c[location_id] * location_id)
 
-    print(sim_score)
+    print(sim_score)  # 23082277
 
 
 if __name__ == '__main__':
