@@ -1,5 +1,5 @@
 import re
-file_path = 'day1.txt'
+file_path = 'input_files/day1.txt'
 
 word_to_digit = {
 	"one": "1", "two": "2", "three": "3", "four": "4", "five": "5",

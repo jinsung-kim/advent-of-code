@@ -1,4 +1,4 @@
-file_path = 'day2.txt'
+file_path = 'input_files/day2.txt'
 
 r, g, b = 12, 13, 14
 
