@@ -2,31 +2,31 @@ file_path = 'day2.txt'
 
 r, g, b = 12, 13, 14
 
+with open(file_path, 'r') as file:
+	day_2_puzzle_input = file.read()
+
+
 def parse_game():
 	game_log = []
-	with open(file_path, 'r') as file:
-		for game_line in file:
-			game_status = game_line.split(':')
-			game_id, game_state = int(game_status[0].split(' ')[1]), game_status[1].strip('\n')
+	game_lines = day_2_puzzle_input.split('\n')
+	for game_line in game_lines:
+		game_status = game_line.split(':')
+		game_id, game_state = int(game_status[0].split(' ')[1]), game_status[1].strip('\n')
 
-			game_log.append([])
-			for game_round in game_state.split(';'):
-				marbles = [m.strip() for m in game_round.split(',')]
+		game_log.append([])
+		for game_round in game_state.split(';'):
+			marbles = [m.strip() for m in game_round.split(',')]
 
-				for color_count in marbles:
-					t = color_count.split(' ')
-					marble_count, color = int(t[0]), t[1]
-					game_log[-1].append((marble_count, color))
+			for color_count in marbles:
+				t = color_count.split(' ')
+				marble_count, color = int(t[0]), t[1]
+				game_log[-1].append((marble_count, color))
 
 	return game_log
 
 
-# https://adventofcode.com/2023/day/2
-def main():
+def part_one(game_log):
 	valid_id_sum = 0
-
-	game_log = parse_game()
-
 	for (ind, game) in enumerate(game_log):
 		valid_game = True
 		game_id = ind + 1
@@ -42,10 +42,10 @@ def main():
 		if valid_game:
 			valid_id_sum += game_id
 
-	# Part One.
-	print(valid_id_sum)  # 2105
+	return valid_id_sum
 
-	# Part Two.
+
+def part_two(game_log):
 	power_set = 0
 
 	for game in game_log:
@@ -62,7 +62,15 @@ def main():
 
 		power_set += (game_min_marbles[0] * game_min_marbles[1] * game_min_marbles[2])
 
-	print(power_set)  # 72422
+	return power_set
+
+
+# https://adventofcode.com/2023/day/2
+def main():
+	game_log = parse_game()
+
+	print('Part One:', part_one(game_log))  # 2105
+	print('Part Two:', part_two(game_log))  # 72422
 
 
 if __name__ == '__main__':

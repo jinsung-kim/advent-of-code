@@ -7,34 +7,45 @@ word_to_digit = {
 }
 
 
+with open(file_path, 'r') as file:
+	day_1_puzzle_input = file.read()
+
+
+def part_one():
+	calibration_sum = 0
+
+	lines = day_1_puzzle_input.split('\n')
+
+	for line in lines:
+		digits = re.findall(r'\d', line)
+
+		if len(digits) == 1:
+			calibration_sum += int(digits[0] * 2)
+		elif len(digits) >= 2:
+			calibration_sum += int(digits[0] + digits[-1])
+
+	return calibration_sum
+
+
+def part_two():
+	real_calibration_sum = 0
+	lines = day_1_puzzle_input.split('\n')
+	for line in lines:
+		matches = re.findall(r'\d|one|two|three|four|five|six|seven|eight|nine', line)
+		digits = [word_to_digit.get(match, match) for match in matches]
+
+		if len(digits) == 1:
+			real_calibration_sum += int(digits[0] * 2)
+		elif len(digits) >= 2:
+			real_calibration_sum += int(digits[0] + digits[-1])
+
+	return real_calibration_sum
+
+
 # https://adventofcode.com/2023/day/1
 def main():
-	calibration_sum = 0
-	with open(file_path, 'r') as file:
-		for line in file:
-			digits = re.findall(r'\d', line)
-
-			if len(digits) == 1:
-				calibration_sum += int(digits[0] * 2)
-			elif len(digits) >= 2:
-				calibration_sum += int(digits[0] + digits[-1])
-
-		# Part One.
-		print(calibration_sum)  # 53334
-
-	real_calibration_sum = 0
-	with open(file_path, 'r') as file:
-		for line in file:
-			matches = re.findall(r'\d|one|two|three|four|five|six|seven|eight|nine', line)
-			digits = [word_to_digit.get(match, match) for match in matches]
-
-			if len(digits) == 1:
-				real_calibration_sum += int(digits[0] * 2)
-			elif len(digits) >= 2:
-				real_calibration_sum += int(digits[0] + digits[-1])
-
-		# Part Two.
-		print(real_calibration_sum)  # 52834
+	print('Part One:', part_one())  # 53334
+	print('Part Two:', part_two())  # 52834
 
 
 if __name__ == '__main__':
